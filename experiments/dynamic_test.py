@@ -1,15 +1,14 @@
 from src.grid import generate_grid
 from src.dynamic import add_dynamic_obstacle, replan
+from src.astar import get_path
 
-def run():
-    grid = generate_grid(20, 0.2)
-    start = (0, 0)
-    goal = (19, 19)
+grid = generate_grid(70, 0.2)
+start = (0, 0)
+goal = (69, 69)
 
-    for step in range(5):
-        grid = add_dynamic_obstacle(grid)
-        parent = replan(grid, start, goal)
-        print(f"Replanning step {step}")
+for step in range(5):
+    grid = add_dynamic_obstacle(grid)
+    parent = replan(grid, start, goal)
+    path = get_path(parent, goal)
 
-if __name__ == "__main__":
-    run()
+    print(f"Step {step} - Path Length:", len(path))
